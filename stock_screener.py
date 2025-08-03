@@ -720,8 +720,9 @@ def run_data_fetch_and_process(symbols_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         DataFrame with processed stock data
     """
-    # Limit to first 20 for demo
-    symbols_to_process = symbols_df['Symbol'].tolist()[:20]
+    # Get the number of symbols to process from session state
+    max_symbols = st.session_state.get('max_symbols_to_process', len(symbols_df))
+    symbols_to_process = symbols_df['Symbol'].tolist()[:max_symbols]
     total_symbols = len(symbols_to_process)
 
     if total_symbols == 0:
@@ -1147,7 +1148,8 @@ def initialize_session_state() -> None:
         "chart_sma_lengths": [20, 50],
         "rsi_config": {'length': 14, 'enabled': True},
         "macd_config": {'fast': 12, 'slow': 26, 'signal': 9, 'enabled': True},
-        "doji_threshold": 5.0
+        "doji_threshold": 5.0,
+        "max_symbols_to_process": 50  # Default to 50 symbols
     }
 
     for key, value in defaults.items():
@@ -1290,6 +1292,17 @@ def setup_display_settings() -> None:
             if length in available_sma_lengths
         ],
         key="chart_sma_multiselect"
+    )
+
+    # Add symbol processing limit control
+    st.session_state.max_symbols_to_process = st.number_input(
+        "מספר מניות לעיבוד:",
+        min_value=1,
+        max_value=500,
+        value=st.session_state.max_symbols_to_process,
+        step=10,
+        help="כמה מניות לעבד (יותר מניות = זמן עיבוד ארוך יותר)",
+        key="max_symbols_input"
     )
 
 

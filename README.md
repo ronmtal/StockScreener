@@ -24,6 +24,11 @@ A comprehensive stock screening application built with Streamlit that allows you
 - Financial growth consistency filters
 - Candlestick pattern filters
 
+### Performance Settings
+- **Configurable Symbol Processing**: Choose how many stocks to process (1-500)
+- **Default**: 50 stocks for optimal balance between speed and coverage
+- **Customizable**: Adjust based on your needs and system performance
+
 ### Visualization
 - Interactive price charts with candlesticks, line charts, and Heikin Ashi
 - Technical indicator overlays
@@ -67,7 +72,10 @@ A comprehensive stock screening application built with Streamlit that allows you
 
 ### 1. Getting Started
 1. **Select an Index**: Choose from S&P 500, Nasdaq 100, Dow Jones, or Russell 2000 in the sidebar
-2. **Configure Indicators**: Set up your preferred technical indicators in the Settings section
+2. **Configure Settings**: 
+   - Set up your preferred technical indicators in the Settings section
+   - Adjust the number of stocks to process (default: 50, max: 500)
+   - Configure display and chart options
 3. **Scan Data**: Click the "🚀 סרוק נתונים" (Scan Data) button to fetch current stock data
 
 ### 2. Setting Up Filters
